@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://gfx/OtherRobot.png" type="Texture" id=1]
 [ext_resource path="res://enemy.gd" type="Script" id=2]
@@ -13,6 +13,40 @@ extents = Vector2( 8.90629, 4.81654 )
 radius = 4.07114
 height = 0.0
 
+[sub_resource type="Animation" id=4]
+resource_name = "left"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 2, 1, 0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "right"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7 ]
+}
+
 [node name="KinematicBody2D" type="KinematicBody2D" groups=[
 "enemy",
 ]]
@@ -22,6 +56,7 @@ script = ExtResource( 2 )
 texture = ExtResource( 1 )
 vframes = 3
 hframes = 4
+frame = 7
 
 [node name="Area2DTop" type="Area2D" parent="."]
 
@@ -37,5 +72,15 @@ shape = SubResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 7.14762 )
 shape = SubResource( 3 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "left"
+anims/left = SubResource( 4 )
+anims/right = SubResource( 5 )
 [connection signal="body_entered" from="Area2DTop" to="." method="_on_Area2DTop_body_entered"]
 [connection signal="body_entered" from="Area2DLeft" to="." method="_on_Area2DLeft_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

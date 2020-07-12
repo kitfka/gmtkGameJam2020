@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://gfx/robot.png" type="Texture" id=1]
 [ext_resource path="res://player.gd" type="Script" id=2]
 [ext_resource path="res://fonts/montreal/Montreal.tres" type="DynamicFont" id=3]
 [ext_resource path="res://fonts/poco/Poco.tres" type="DynamicFont" id=4]
+[ext_resource path="res://music/electricshock.wav" type="AudioStream" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "left"
@@ -42,6 +43,23 @@ tracks/0/keys = {
 [sub_resource type="CapsuleShape2D" id=3]
 radius = 5.6333
 height = 10.2283
+
+[sub_resource type="ParticlesMaterial" id=4]
+flag_disable_z = true
+gravity = Vector3( -80, 0, 0 )
+initial_velocity = 49.18
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 0.490196, 0.486275, 0.486275, 1 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+flag_disable_z = true
+spread = 21.39
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 0.956863, 1, 0, 1 )
 
 [node name="player" type="KinematicBody2D"]
 collision_layer = 5
@@ -83,12 +101,12 @@ anchor_left = -3.15
 anchor_top = -1.819
 anchor_right = -3.15
 anchor_bottom = -1.819
-margin_left = -512.0
-margin_top = -299.528
-margin_right = -478.0
-margin_bottom = -278.528
+margin_left = -504.5
+margin_top = -300.0
+margin_right = -400.5
+margin_bottom = -279.0
 custom_fonts/font = ExtResource( 3 )
-text = "How moch left:"
+text = "enemies left:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -98,10 +116,10 @@ anchor_left = -3.15
 anchor_top = -1.819
 anchor_right = -3.15
 anchor_bottom = -1.819
-margin_left = -390.0
+margin_left = -306.5
 margin_top = -300.0
-margin_right = -268.0
-margin_bottom = -279.0
+margin_right = -184.5
+margin_bottom = -262.0
 custom_fonts/font = ExtResource( 3 )
 text = "0/4"
 __meta__ = {
@@ -113,10 +131,10 @@ anchor_left = -3.15
 anchor_top = -1.819
 anchor_right = -3.15
 anchor_bottom = -1.819
-margin_left = -10.4161
-margin_top = -53.8507
-margin_right = 4.58387
-margin_bottom = -32.8507
+margin_left = -12.7972
+margin_top = -86.3924
+margin_right = 14.2028
+margin_bottom = -48.3924
 custom_fonts/font = ExtResource( 3 )
 text = "w"
 __meta__ = {
@@ -172,4 +190,27 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 0.471937 )
 shape = SubResource( 3 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 0, 12 )
+rotation = -1.57079
+emitting = false
+amount = 50
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.83
+process_material = SubResource( 4 )
+
+[node name="Particles2D2" type="Particles2D" parent="."]
+position = Vector2( 0, -5.56218 )
+rotation = -2.45649
+emitting = false
+amount = 50
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource( 5 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -25.0
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

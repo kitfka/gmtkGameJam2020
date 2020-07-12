@@ -92,6 +92,8 @@ func SetUi():
 	ControlNode._set_position(get_topleft())
 
 func randomKeys():
+	$Particles2D2.emitting = true
+	$AudioStreamPlayer.play()
 	usedKeys = []
 	
 	usedKeys.append(keyUp)
@@ -143,8 +145,13 @@ func _on_Timer_timeout():
 func _on_fall(n):
 	if n == self:
 		$Timer.stop()
-		$Timer.wait_time = 2
+		$Timer.wait_time = 3
 		$Timer.start()
+		randomKeys()
+		$Particles2D.emitting = true
+		
+	
+	
 
 func _on_knockback():
 	knockback = true
