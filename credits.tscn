@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 1 )
+
+[node name="Credits" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_right = 584.0
+margin_bottom = 193.0
+text = "Game Made for the GMTK 2020 GameJam! Id did not go wellll.... :|
+
+
+Game by Kitfka
+https://github.com/kitfka/gmtkGameJam2020
+
+
+
+Used art:
+- Will Tice
+- url https://untiedgames.itch.io/free-grasslands-tileset"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}

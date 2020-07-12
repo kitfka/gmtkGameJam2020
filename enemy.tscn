@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://gfx/OtherRobot.png" type="Texture" id=1]
+[ext_resource path="res://enemy.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 3.82622, 1.57957 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8.90629, 4.81654 )
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 4.07114
+height = 0.0
+
+[node name="KinematicBody2D" type="KinematicBody2D" groups=[
+"enemy",
+]]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+vframes = 3
+hframes = 4
+
+[node name="Area2DTop" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DTop"]
+position = Vector2( 0, -7.12719 )
+shape = SubResource( 1 )
+
+[node name="Area2DLeft" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DLeft"]
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 7.14762 )
+shape = SubResource( 3 )
+[connection signal="body_entered" from="Area2DTop" to="." method="_on_Area2DTop_body_entered"]
+[connection signal="body_entered" from="Area2DLeft" to="." method="_on_Area2DLeft_body_entered"]
